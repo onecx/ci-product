@@ -6,7 +6,6 @@ on:
 jobs:
   helm:
     uses: onecx/ci-common/.github/workflows/helm-build.yml@v1
-    needs: quarkus
     secrets: inherit
     with:
       push: true
