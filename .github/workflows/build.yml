@@ -1,0 +1,16 @@
+name: build
+
+on:
+  workflow_call:
+  
+jobs:
+  helm:
+    uses: onecx/ci-common/.github/workflows/helm-build.yml@v1
+    needs: quarkus
+    secrets: inherit
+    with:
+      push: true
+      artifact: ''    
+      helmdir: 'helm'
+      helmAbsoluteDir: true
+      templateValuesYaml: 'product.version={{ .Version }},product.name={{ .Name }}'

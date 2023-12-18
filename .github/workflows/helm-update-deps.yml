@@ -1,0 +1,38 @@
+name: Update helm chart dependencies
+
+on:
+  workflow_call:
+    inputs:
+      helmSourceDir:
+        description: 'Helm source directory path'
+        default: 'helm'
+        required: false
+        type: string
+
+jobs:
+  build:
+    name: helm chart update dependency
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true    
+    permissions:
+      contents: write
+    steps:
+      - name: Event
+        run: |
+          echo ${{ github.event.client_payload.name }}
+          echo ${{ github.event.client_payload.version }}
+          echo ${{ github.event.client_payload.repo }}
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.CI_PAT }}
+          ref: ${{ github.head_ref }}
+      - uses: lorislab/install-samo-action@v2
+      - name: Update helm chart
+        run:
+          samo project helm lock-update --helm-absolute-dir --helm-dir ${{ inputs.helmSourceDir }} -v debug
+      - run: rm -rf samo
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(deps): update ${{ github.event.client_payload.name }} version ${{ github.event.client_payload.version }}'
