@@ -16,7 +16,7 @@ on:
         description: 'Helm repository'
         default: 'oci://ghcr.io/onecx/charts'
         required: false
-        type: string        
+        type: string
 jobs:
   build:
     name: helm create update event
