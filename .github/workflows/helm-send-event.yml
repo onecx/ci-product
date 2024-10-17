@@ -21,6 +21,8 @@ jobs:
   build:
     name: helm create update event
     runs-on: ubuntu-latest
+    env:
+      SAMO_CONVENTIONAL_COMMITS: 'true'    
     permissions:
       contents: write
     steps:
