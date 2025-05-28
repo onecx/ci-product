@@ -7,6 +7,8 @@ jobs:
   helm:
     uses: onecx/ci-common/.github/workflows/helm-release.yml@v1
     secrets: inherit
+    with:
+      templateReleaseValuesYaml: 'product.version={{ .Release }}'
   changelog:
     uses: onecx/ci-common/.github/workflows/generate-changelog.yml@v1
     needs: helm
