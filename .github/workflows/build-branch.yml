@@ -1,0 +1,21 @@
+name: branch
+
+on:
+  workflow_call:
+    inputs:
+      addRepoDeps:
+        description: 'Add repository from dependencies'
+        default: false
+        required: false
+        type: boolean
+jobs:
+  helm:
+    uses: onecx/ci-common/.github/workflows/helm-build.yml@v1
+    secrets: inherit
+    with:
+      push: false
+      artifact: ''
+      helmdir: 'helm'
+      helmAbsoluteDir: true
+      addRepoDeps: ${{ inputs.addRepoDeps }}
+      templateValuesYaml: 'product.version={{ .Version }},product.name={{ .Name }}'
