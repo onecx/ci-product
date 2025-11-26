@@ -30,6 +30,7 @@ jobs:
           echo ${{ github.event.client_payload.name }}
           echo ${{ github.event.client_payload.version }}
           echo ${{ github.event.client_payload.repo }}
+          echo ${{ github.event.client_payload.branch }}
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.CI_PAT }}

@@ -7,6 +7,11 @@ on:
         description: 'Target repository'
         required: true
         type: string
+      targetBranch:
+        description: 'Target branch'
+        default: 'main'
+        required: false
+        type: string
       eventName:
         description: 'Event name'
         default: 'helm-update-deps'
@@ -39,4 +44,4 @@ jobs:
           token: ${{ secrets.CI_PAT }}
           repository: ${{ inputs.targetRepository }}
           event-type: ${{ inputs.eventName }}
-          client-payload: '{"name": "${{ steps.project_name.outputs.stdout }}", "version": "${{ steps.project_version.outputs.stdout }}", "repo": "${{ inputs.helmRepository }}"}'
+          client-payload: '{"name": "${{ steps.project_name.outputs.stdout }}", "version": "${{ steps.project_version.outputs.stdout }}", "repo": "${{ inputs.helmRepository }}, "branch": "${{ inputs.targetBranch }}"}'
