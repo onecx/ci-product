@@ -44,4 +44,4 @@ jobs:
           token: ${{ secrets.CI_PAT }}
           repository: ${{ inputs.targetRepository }}
           event-type: ${{ inputs.eventName }}
-          client-payload: '{"name": "${{ steps.project_name.outputs.stdout }}", "version": "${{ steps.project_version.outputs.stdout }}", "repo": "${{ inputs.helmRepository }}, "branch": "${{ inputs.targetBranch }}"}'
+          client-payload: '{"name": "${{ steps.project_name.outputs.stdout }}", "version": "${{ steps.project_version.outputs.stdout }}", "repo": "${{ inputs.helmRepository }}", "branch": "${{ inputs.targetBranch }}"}'
